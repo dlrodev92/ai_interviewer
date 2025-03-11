@@ -1,3 +1,4 @@
+
 export const APP_CONFIG = {
   API: {
     BASE_URL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000",
@@ -18,5 +19,11 @@ export const APP_CONFIG = {
     BUCKET: process.env.AWS_S3_BUCKET!,
     ACCESS_KEY: process.env.AWS_ACCESS_KEY_ID!,
     SECRET_KEY: process.env.AWS_SECRET_ACCESS_KEY!,
+  },
+  DB: {
+    DATABASE_URL: process.env.DATABASE_URL,
+  },
+  RESEND: {
+    API_KEY: process.env.RESEND_API_KEY,
   },
 };
