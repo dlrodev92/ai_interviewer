@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import Auth0Provider from "next-auth/providers/auth0";
-import { APP_CONFIG } from "@/config";
+import { APP_CONFIG } from "@/config/envConfig";
 
 export const authOptions: NextAuthOptions = {
   providers: [

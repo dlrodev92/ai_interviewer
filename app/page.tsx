@@ -1,15 +1,25 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-
+import { AuthButton } from '@/components/AuthButton';
+import Image from 'next/image'
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold">AI Interviewer</h1>
-          <Link href="/dashboard">
-            <Button>Go to Dashboard</Button>
-          </Link>
+          <Image 
+            src="/logo.svg" 
+            alt="AI Interviewer Logo"
+            width={120}
+            height={120}
+          />
+          
+          <div className="flex gap-4 items-center">
+            <Link href="/dashboard">
+              <Button variant="ghost">Dashboard</Button>
+            </Link>
+            <AuthButton />
+          </div>
         </div>
       </header>
 

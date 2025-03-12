@@ -1,14 +1,20 @@
+"use client";
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { AuthButton } from '@/components/AuthButton';
 
 export default function Dashboard() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">AI Interviewer Dashboard</h1>
-        <Link href="/">
-          <Button variant="outline">Back to Home</Button>
-        </Link>
+        <div className="flex gap-4 items-center">
+          <Link href="/">
+            <Button variant="outline">Back to Home</Button>
+          </Link>
+          <AuthButton />
+        </div>
       </div>
       
       <div className="grid gap-6 md:grid-cols-2">
