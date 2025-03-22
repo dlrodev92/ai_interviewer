@@ -1,7 +1,6 @@
-
 export const APP_CONFIG = {
   API: {
-    BASE_URL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000",
+    BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
   },
   AUTH: {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET!,
@@ -12,7 +11,7 @@ export const APP_CONFIG = {
     },
   },
   REDIS: {
-    URL: process.env.REDIS_URL || "redis://localhost:6379",
+    URL: process.env.REDIS_URL || 'redis://localhost:6379',
   },
   AWS: {
     REGION: process.env.AWS_REGION!,
@@ -25,5 +24,8 @@ export const APP_CONFIG = {
   },
   RESEND: {
     API_KEY: process.env.RESEND_API_KEY,
+  },
+  ULTRAVOX: {
+    API_KEY: process.env.ULTRAVOX_API_KEY,
   },
 };

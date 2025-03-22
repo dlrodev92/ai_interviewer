@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
-import Auth0Provider from "next-auth/providers/auth0";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "@/lib/prisma";
+import NextAuth from 'next-auth';
+import Auth0Provider from 'next-auth/providers/auth0';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import prisma from '@/lib/prisma';
 
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -14,7 +14,7 @@ const handler = NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   callbacks: {
     async session({ session, token }) {
@@ -31,10 +31,10 @@ const handler = NextAuth({
     },
   },
   pages: {
-    signIn: "/",
-    signOut: "/",
-    error: "/",
+    signIn: '/',
+    signOut: '/',
+    error: '/',
   },
 });
 
-export { handler as GET, handler as POST }; 
+export { handler as GET, handler as POST };

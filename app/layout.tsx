@@ -1,16 +1,13 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Aldrich } from 'next/font/google';
 import './globals.css';
-import { Providers } from "./providers";
+import { Providers } from './providers';
+import { cn } from '@/lib/utils';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const aldrichSans = Aldrich({
+  weight: '400',
+  display: 'swap',
+  variable: '--font-aldrich',
 });
 
 export const metadata: Metadata = {
@@ -26,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased',
+          aldrichSans.variable
+        )}
       >
         <Providers>{children}</Providers>
       </body>

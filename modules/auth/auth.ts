@@ -1,5 +1,5 @@
 // modules/auth/auth.ts
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export const login = async (provider: string, options?: object) => {
   return signIn(provider, options);

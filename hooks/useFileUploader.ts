@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { api } from "@/core/apiHandler"; // Using our Axios API function
+import { useState } from 'react';
+import { api } from '@/core/apiHandler'; // Using our Axios API function
 
-type FileUploadStatus = "idle" | "uploading" | "done" | "error";
+type FileUploadStatus = 'idle' | 'uploading' | 'done' | 'error';
 
 export const useFileUploader = (endpoint: string) => {
-  const [status, setStatus] = useState<FileUploadStatus>("idle");
+  const [status, setStatus] = useState<FileUploadStatus>('idle');
   const [progress, setProgress] = useState(0);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
 
   const uploadFile = async (file: File) => {
-    setStatus("uploading");
+    setStatus('uploading');
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append('file', file);
 
     try {
       const response = await api.post<{ fileUrl: string }>(endpoint, formData);
       setFileUrl(response.fileUrl);
-      setStatus("done");
+      setStatus('done');
     } catch (error) {
-      setStatus("error");
+      setStatus('error');
     }
   };
 

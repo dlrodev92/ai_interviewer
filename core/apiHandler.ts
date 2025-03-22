@@ -1,11 +1,11 @@
 // core/api/apiHandler.ts
-import axios from "axios";
+import axios from 'axios';
 
 export class ApiHandler {
   private baseUrl: string;
 
   constructor(baseUrl?: string) {
-    this.baseUrl = baseUrl || process.env.NEXT_PUBLIC_API_URL || "";
+    this.baseUrl = baseUrl || process.env.NEXT_PUBLIC_API_URL || '';
   }
 
   async get<T>(endpoint: string, params?: object): Promise<T> {
@@ -30,4 +30,4 @@ export class ApiHandler {
 }
 
 // Export a default instance with the API URL
-export const api = new ApiHandler();
+export const apiHandler = new ApiHandler();

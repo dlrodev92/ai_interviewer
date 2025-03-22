@@ -1,4 +1,4 @@
-import { clsx, type ClassValue } from 'clsx';
+import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 // lib/utils.ts
 export const classNames = (...classes: string[]) => {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 };
 
 // ✅ Formats file sizes in KB/MB/GB

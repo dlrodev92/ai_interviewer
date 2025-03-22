@@ -1,7 +1,7 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import Auth0Provider from "next-auth/providers/auth0";
-import { APP_CONFIG } from "@/config/envConfig";
+import NextAuth, { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import Auth0Provider from 'next-auth/providers/auth0';
+import { APP_CONFIG } from '@/config/envConfig';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -12,28 +12,28 @@ export const authOptions: NextAuthOptions = {
     }),
 
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing credentials");
+          throw new Error('Missing credentials');
         }
 
         // ✅ Authenticate against your backend
         const res = await fetch(`${APP_CONFIG.API.BASE_URL}/auth/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(credentials),
         });
 
-        if (!res.ok) throw new Error("Invalid credentials");
+        if (!res.ok) throw new Error('Invalid credentials');
 
         const user = await res.json();
         if (!user || !user.accessToken || !user.role) {
-          throw new Error("Invalid user data from API");
+          throw new Error('Invalid user data from API');
         }
 
         return user; // This is passed to `jwt()` callback
@@ -70,7 +70,7 @@ export const authOptions: NextAuthOptions = {
   },
 
   secret: APP_CONFIG.AUTH.NEXTAUTH_SECRET,
-  session: { strategy: "jwt" },
+  session: { strategy: 'jwt' },
 };
 
 export default NextAuth(authOptions);
