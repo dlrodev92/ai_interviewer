@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useFileUploader } from '@/hooks/useFileUploader';
+import { useFileUploader } from '@/lib/useFileUploader';
 import { formatFileSize } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

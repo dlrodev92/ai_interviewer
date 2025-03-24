@@ -23,7 +23,7 @@ const features = [
 
 export default function Comparison() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-foreground-2">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-16">
           Why AI Training Beats Going in Blind

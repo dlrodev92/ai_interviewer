@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { api } from '@/core/apiHandler'; // Using our Axios API function
+import { apiHandler } from '@/core/apiHandler'; 
 
 type FileUploadStatus = 'idle' | 'uploading' | 'done' | 'error';
 
@@ -15,7 +15,7 @@ export const useFileUploader = (endpoint: string) => {
     formData.append('file', file);
 
     try {
-      const response = await api.post<{ fileUrl: string }>(endpoint, formData);
+      const response = await apiHandler.post<{ fileUrl: string }>(endpoint, formData);
       setFileUrl(response.fileUrl);
       setStatus('done');
     } catch (error) {

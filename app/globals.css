@@ -16,6 +16,8 @@
   /* Theme-based colors from variables */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
+  --color-foreground-2: var(--foreground-2);
+  --color-foreground-3: hsl(var(--foreground-3));
   --font-sans: var(--font-aldrich);
   --font-mono: var(--font-aldrich);
 
@@ -68,6 +70,7 @@
   /* Gradient reference */
   --gradient-hero-text: var(--gradient-hero-text);
   --crossbar-gradient-hero-bg: var(--crossbar-gradient-hero-bg);
+
 }
 
 /* ----------------------------
@@ -83,8 +86,10 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 74 79% 45%;
-    --card: 74 79% 45%;
+    --foreground: 96 34% 59%;
+    --foreground-2: #DCEAC5;
+    --foreground-3: 111, 25%, 52%;
+    --card: 96 34% 59%;
     --card-foreground: 200 5% 24%;
     --popover: 0 0% 100%;
     --popover-foreground: 200 5% 24%;
@@ -92,7 +97,7 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 100%;
     --secondary-foreground: 200 5% 24%;
-    --muted: 74 79% 40%;
+    --muted: 96 34% 30%;
     --muted-foreground: 0 0% 100%;
     --accent: 0 0% 100%;
     --accent-foreground: 200 5% 24%;
@@ -100,7 +105,7 @@
     --destructive-foreground: 0 0% 100%;
     --border: 0 0% 100%;
     --input: 0 0% 100%;
-    --ring: 74 79% 45%;
+    --ring: 96 34% 59%;
     --radius: 0.5rem;
 
     --gradient-hero-text: linear-gradient(
@@ -120,23 +125,25 @@
   .dark {
     --background: 200 5% 24%;
     --foreground: 0 0% 100%;
+    --foreground-2: 84, 50%, 86%;
+    --foreground-3: 111, 25%, 52%;
     --card: 200 5% 24%;
     --card-foreground: 0 0% 100%;
     --popover: 200 5% 24%;
     --popover-foreground: 0 0% 100%;
-    --primary: 74 79% 45%;
+    --primary: 96 34% 59%;
     --primary-foreground: 0 0% 100%;
     --secondary: 200 5% 24%;
     --secondary-foreground: 0 0% 100%;
     --muted: 200 5% 30%;
     --muted-foreground: 0 0% 90%;
-    --accent: 74 79% 45%;
+    --accent: 96 34% 59%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 74 79% 45%;
+    --border: 96 34% 59%;
     --input: 200 5% 30%;
-    --ring: 74 79% 45%;
+    --ring: 96 34% 59%;
 
     --gradient-hero-text: linear-gradient(
       135deg,
@@ -171,7 +178,9 @@
 /* ----------------------------
    Utilities
 ----------------------------- */
-@layer utilities {
+@layer utilities { 
+  
+
   .gradient-hero-text {
     background-image: var(--gradient-hero-text);
     -webkit-background-clip: text;
@@ -179,7 +188,7 @@
     color: transparent;
     -webkit-text-fill-color: transparent;
   }
-
+  
   .bg-crossbar-gradient-hero-bg {
     background-image: var(--crossbar-gradient-hero-bg);
   }
@@ -255,6 +264,24 @@
   .image-delay-2 {
     animation: flipIn 1s ease-out 2.1s forwards;
   }
+  .animate-scaleInPop {
+    animation: scaleInPop 0.6s ease-out forwards;
+  }
+  .animate-flicker {
+    animation: flicker 1.5s infinite alternate;
+  }
+  .wave1 {
+    animation: wave1 6s ease-in-out infinite alternate;
+  }
+
+  .wave2 {
+    animation: wave2 5s ease-in-out infinite alternate;
+  }
+
+  .wave3 {
+    animation: wave3 7s ease-in-out infinite alternate;
+  }
+
 }
 
 /* ----------------------------
@@ -319,37 +346,105 @@
   }
 }
 
-/* ----------------------------
-   Optional Binary Rain Effect
------------------------------ */
-.binary-rain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  color: hsl(var(--primary));
-  font-family: monospace;
-  font-size: 14px;
-  line-height: 1.2;
-  letter-spacing: 2px;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0%,
-    transparent 50%,
-    currentColor 50%,
-    currentColor 100%
-  );
-  background-size: 2px 4px;
-  animation: rain 20s linear infinite;
-  pointer-events: none;
+@keyframes scaleInPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
-@keyframes rain {
-  from {
-    background-position: 0 0;
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 0px hsl(var(--primary));
   }
-  to {
-    background-position: 0 1000px;
+  100% {
+    text-shadow: 0 0 10px hsl(var(--primary));
   }
 }
+
+@keyframes logoAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(0.15) blur(0px);
+  }
+  50% {
+    transform: scale(1.15);
+    filter: brightness(0.3) blur(1px);
+  }
+}
+
+@keyframes logoBlur {
+  0%, 100% {
+    filter: blur(0px) brightness(0.2);
+  }
+  50% {
+    filter: blur(0px) brightness(0.3);
+  }
+}
+
+@keyframes logoFade {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Add wave animations */
+@keyframes wave1 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-30%);
+  }
+}
+
+@keyframes wave2 {
+  0% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(-40%);
+  }
+}
+
+@keyframes wave3 {
+  0% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+
+
+
+
+
+
