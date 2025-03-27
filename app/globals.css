@@ -70,7 +70,6 @@
   /* Gradient reference */
   --gradient-hero-text: var(--gradient-hero-text);
   --crossbar-gradient-hero-bg: var(--crossbar-gradient-hero-bg);
-
 }
 
 /* ----------------------------
@@ -87,7 +86,7 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 96 34% 59%;
-    --foreground-2: #DCEAC5;
+    --foreground-2: #dceac5;
     --foreground-3: 111, 25%, 52%;
     --card: 96 34% 59%;
     --card-foreground: 200 5% 24%;
@@ -178,9 +177,7 @@
 /* ----------------------------
    Utilities
 ----------------------------- */
-@layer utilities { 
-  
-
+@layer utilities {
   .gradient-hero-text {
     background-image: var(--gradient-hero-text);
     -webkit-background-clip: text;
@@ -188,7 +185,7 @@
     color: transparent;
     -webkit-text-fill-color: transparent;
   }
-  
+
   .bg-crossbar-gradient-hero-bg {
     background-image: var(--crossbar-gradient-hero-bg);
   }
@@ -256,11 +253,11 @@
   .image-delay-05 {
     animation: flipIn 1s ease-out 0.7s forwards;
   }
-  
+
   .image-delay-1 {
     animation: flipIn 1s ease-out 1.4s forwards;
   }
-  
+
   .image-delay-2 {
     animation: flipIn 1s ease-out 2.1s forwards;
   }
@@ -282,6 +279,22 @@
     animation: wave3 7s ease-in-out infinite alternate;
   }
 
+  /* 3D Card Flip Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
 }
 
 /* ----------------------------
@@ -385,7 +398,8 @@
 }
 
 @keyframes logoPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     filter: brightness(0.15) blur(0px);
   }
@@ -396,7 +410,8 @@
 }
 
 @keyframes logoBlur {
-  0%, 100% {
+  0%,
+  100% {
     filter: blur(0px) brightness(0.2);
   }
   50% {
@@ -405,7 +420,8 @@
 }
 
 @keyframes logoFade {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.1;
   }
   50% {
@@ -440,11 +456,3 @@
     transform: translateX(-50%);
   }
 }
-
-
-
-
-
-
-
-

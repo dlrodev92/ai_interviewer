@@ -1,11 +1,8 @@
 import { ArrowRightIcon, ArrowUpIcon } from 'lucide-react';
 
-
 export default function ImageGrid() {
   return (
     <div className="grid grid-cols-2 gap-8 place-items-center animate-fade-in-delay w-3/4 md:w-1/2 relative z-10">
-      
-      
       <div className="col-span-2 w-72 h-72 relative group z-10">
         <div className="gradient-burst gradient-burst-sm opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
         <img
@@ -19,7 +16,6 @@ export default function ImageGrid() {
         </p>
       </div>
 
-      
       <div className="relative w-64 h-64 group z-10">
         <div className="gradient-burst gradient-burst-sm opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
         <img

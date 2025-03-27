@@ -1,7 +1,6 @@
 import HeroContent from '@/components/HeroContent';
 import HeroImageGrid from '@/components/HeroImageGrid';
 
-
 export default function Hero() {
   return (
     <section className="relative min-h-[500px] bg-background overflow-hidden pt-24 border-4">

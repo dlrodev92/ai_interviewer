@@ -7,7 +7,11 @@ type ScrollRef = RefObject<HTMLDivElement | null>;
 
 const LocomotiveScrollContext = createContext<ScrollRef | null>(null);
 
-export function LocomotiveProvider({ children }: { children: React.ReactNode }) {
+export function LocomotiveProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,7 +44,9 @@ export function LocomotiveProvider({ children }: { children: React.ReactNode }) 
 export function useLocomotiveScrollRef() {
   const context = useContext(LocomotiveScrollContext);
   if (context === null) {
-    throw new Error('useLocomotiveScrollRef must be used within a LocomotiveScrollProvider');
+    throw new Error(
+      'useLocomotiveScrollRef must be used within a LocomotiveScrollProvider'
+    );
   }
   return context;
 }

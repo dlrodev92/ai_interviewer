@@ -24,4 +24,4 @@ declare module 'locomotive-scroll' {
       instance: ScrollInstance;
     };
   }
-} 
+}
