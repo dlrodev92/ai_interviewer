@@ -1,39 +1,32 @@
 'use client';
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { AuthButton } from '@/components/AuthButton';
+import Navigation from '@/components/Navigation';
+import DashboardHeader from '@/components/dashboard/DashboardHeader';
+import InterviewTypeGrid from '@/components/dashboard/InterviewTypeGrid';
+import CreditsCard from '@/components/dashboard/CreditsCard';
 
 export default function Dashboard() {
+  // TODO- In a real app, you would fetch this from an API or context
+  const creditsAvailable = 3;
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">AI Interviewer Dashboard</h1>
-        <div className="flex gap-4 items-center">
-          <Link href="/">
-            <Button variant="outline">Back to Home</Button>
-          </Link>
-          <AuthButton />
-        </div>
-      </div>
+    <div className="min-h-screen bg-background">
+     
+      <Navigation />
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="p-6 rounded-lg border bg-card">
-          <h2 className="text-xl font-semibold mb-4">Start New Interview</h2>
-          <p className="text-muted-foreground mb-4">
-            Paste a job description to begin your mock interview.
-          </p>
-          <Button className="w-full">Start Interview</Button>
-        </div>
+     
+      <main className="container mx-auto px-4 py-12 pt-28">
 
-        <div className="p-6 rounded-lg border bg-card">
-          <h2 className="text-xl font-semibold mb-4">Credits Available</h2>
-          <p className="text-3xl font-bold mb-2">1</p>
-          <p className="text-muted-foreground">
-            Free interview token remaining
-          </p>
-        </div>
-      </div>
+        <DashboardHeader 
+          title="Choose Your Interview Type"
+          description="Select the type of interview you want to practice today."
+        />
+        
+        <InterviewTypeGrid />
+        
+        <CreditsCard creditsAvailable={creditsAvailable} />
+
+      </main>
     </div>
   );
 }
