@@ -2,14 +2,10 @@
 
 import { useState, useRef } from 'react';
 import { Transcript } from 'ultravox-client';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { InterviewManager } from '@/lib/interview/interviewManager';
-import { 
-  VideoContainer,
-  InterviewHeader
-} from '@/components/interview';
+import  VideoContainer  from '@/components/interview/VideoContainer';
+import InterviewHeader  from '@/components/interview/InterviewHeader';
+import TranscriptSidebar from '@/components/interview/TranscriptSideBar';
 
 export default function BehavioralInterviewPage() {
   const [isCallActive, setIsCallActive] = useState(false);
@@ -55,70 +51,35 @@ export default function BehavioralInterviewPage() {
   };
 
   return (
-    <div className="max-w-4xl h-full mx-auto flex flex-col items-center">
+    <div className="h-auto mx-auto">
       <InterviewHeader 
         title="Behavioral Interview" 
         type="behavioral"
       />
       
-      <div className="w-full space-y-6">
-        <VideoContainer isCallActive={isCallActive} />
-        
-        <Card className="border-border/50 w-full">
-          <CardContent className="pt-6">
-            {callTranscript.length > 0 ? (
-              <ScrollArea className="h-[300px] w-full rounded-md border p-4">
-                {callTranscript.map((t, i) => (
-                  <div key={i} className="mb-4">
-                    <p className="text-sm text-muted-foreground font-aldrich">
-                      {t.speaker === 'agent' ? 'AI Interviewer' : 'You'}
-                    </p>
-                    <p className="mt-1 font-aldrich">{t.text}</p>
-                  </div>
-                ))}
-              </ScrollArea>
-            ) : (
-              <div className="h-[300px] rounded-md border flex items-center justify-center">
-                <p className="text-muted-foreground">
-                  Transcript will appear here once the interview begins.
-                </p>
+      <div className="w-full flex flex-col md:flex-row items-start justify-center gap-4">
+        {/* Main video container - 80% of the width */}
+        <div className="w-4/5">
+          <VideoContainer isCallActive={isCallActive} startInterview={() => startInterview()} endInterview={ () => endInterview()} />
+          
+          <div className="mt-6 flex flex-col items-center">
+            <div className="space-y-6 max-w-md w-full">
+              <div className="text-center text-muted-foreground font-aldrich">
+                Status: {agentStatus}
               </div>
-            )}
-            
-            <div className="mt-8 flex flex-col items-center">
-              <div className="space-y-6 max-w-md w-full">
-                <div className="text-center text-muted-foreground font-aldrich">
-                  Status: {agentStatus}
-                </div>
 
-                {error && (
-                  <div className="p-4 text-red-500 bg-red-50 rounded-md font-aldrich">
-                    Error: {error}
-                  </div>
-                )}
-
-                <div className="flex justify-center gap-4 py-2">
-                  {!isCallActive ? (
-                    <Button 
-                      className="font-aldrich w-full py-6 text-lg bg-primary hover:bg-primary/90 shadow-md hover:shadow-xl transition-all" 
-                      onClick={startInterview}
-                    >
-                      Start Interview
-                    </Button>
-                  ) : (
-                    <Button
-                      className="font-aldrich w-full py-6 text-lg bg-destructive hover:bg-destructive/90 shadow-md hover:shadow-xl transition-all"
-                      variant="destructive"
-                      onClick={endInterview}
-                    >
-                      End Interview
-                    </Button>
-                  )}
+              {error && (
+                <div className="p-4 text-red-500 bg-red-50 rounded-md font-aldrich">
+                  Error: {error}
                 </div>
-              </div>
+              )}
+
+              
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
+        
+        <TranscriptSidebar callTranscript={callTranscript} />
       </div>
     </div>
   );

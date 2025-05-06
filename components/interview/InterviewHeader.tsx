@@ -78,7 +78,7 @@ export default function InterviewHeader({ title, type }: InterviewHeaderProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="absolute -right-80 top-2 z-50 w-72"
+              className="absolute right-12 top-2 z-50 w-72"
             >
               <Card className="border-border/50 shadow-lg">
                 <CardHeader className="pb-2">
