@@ -7,6 +7,7 @@ declare module 'next-auth' {
     email: string;
     role: string;
     accessToken: string;
+    tokenBalance: number;
   }
 
   interface Session {
@@ -16,5 +17,7 @@ declare module 'next-auth' {
   interface JWT {
     accessToken: string;
     role: string;
+    id: string;
+    tokenBalance: number;
   }
 }

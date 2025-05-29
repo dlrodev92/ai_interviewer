@@ -22,7 +22,9 @@ export default function CreditsCard({ creditsAvailable }: CreditsCardProps) {
         <CardContent className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-center md:text-left">
             <p className="text-3xl font-bold mb-2">{creditsAvailable}</p>
-            <p className="text-muted-foreground">Free interview tokens remaining</p>
+            <p className="text-muted-foreground">
+              Free interview tokens remaining
+            </p>
           </div>
         </CardContent>
       </Card>

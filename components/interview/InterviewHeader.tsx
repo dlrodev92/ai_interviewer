@@ -4,7 +4,13 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
 import { ArrowLeft, Info, Check, Lightbulb } from 'lucide-react';
 
 interface InterviewHeaderProps {
@@ -13,42 +19,45 @@ interface InterviewHeaderProps {
 }
 
 const typeInfo = {
-  'behavioral': {
+  behavioral: {
     title: 'Behavioral Interview',
-    description: 'Focus on your past experiences and soft skills. Use the STAR method to structure your answers.',
+    description:
+      'Focus on your past experiences and soft skills. Use the STAR method to structure your answers.',
     tips: [
       'Use the STAR method (Situation, Task, Action, Result)',
       'Prepare stories showcasing leadership and teamwork',
       'Be specific and quantify outcomes when possible',
-      'Listen carefully to questions before answering'
-    ]
+      'Listen carefully to questions before answering',
+    ],
   },
-  'technical': {
+  technical: {
     title: 'Technical Interview',
-    description: 'Prepare to solve coding problems and discuss technical concepts related to your expertise.',
+    description:
+      'Prepare to solve coding problems and discuss technical concepts related to your expertise.',
     tips: [
       'Think out loud as you solve problems',
       'Ask clarifying questions before diving in',
       'Consider edge cases in your solutions',
-      'Explain your approach before coding'
-    ]
+      'Explain your approach before coding',
+    ],
   },
   'system-design': {
     title: 'System Design Interview',
-    description: 'Demonstrate your ability to design scalable systems and explain architectural decisions.',
+    description:
+      'Demonstrate your ability to design scalable systems and explain architectural decisions.',
     tips: [
       'Clarify requirements and constraints first',
       'Discuss trade-offs in your design decisions',
       'Start with high-level architecture, then get specific',
-      'Consider scalability, reliability, and performance'
-    ]
-  }
+      'Consider scalability, reliability, and performance',
+    ],
+  },
 };
 
 export default function InterviewHeader({ title, type }: InterviewHeaderProps) {
   const [showTips, setShowTips] = useState(false);
   const info = typeInfo[type];
-  
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -63,16 +72,16 @@ export default function InterviewHeader({ title, type }: InterviewHeaderProps) {
         </Link>
         <h1 className="text-3xl font-bold text-primary">{info.title}</h1>
         <div className="relative">
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className="h-12 w-12 rounded-full"
             onMouseEnter={() => setShowTips(true)}
             onMouseLeave={() => setShowTips(false)}
           >
             <Info size={24} className="text-primary" />
           </Button>
-          
+
           {showTips && (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -84,7 +93,8 @@ export default function InterviewHeader({ title, type }: InterviewHeaderProps) {
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg flex items-center gap-2">
                     <Lightbulb size={20} className="text-yellow-500" />
-                    {type.charAt(0).toUpperCase() + type.slice(1)} Interview Tips
+                    {type.charAt(0).toUpperCase() + type.slice(1)} Interview
+                    Tips
                   </CardTitle>
                   <CardDescription>
                     Quick tips to help you succeed
@@ -93,11 +103,11 @@ export default function InterviewHeader({ title, type }: InterviewHeaderProps) {
                 <CardContent>
                   <ul className="space-y-2">
                     {info.tips.map((tip, index) => (
-                      <motion.li 
+                      <motion.li
                         key={index}
-                        initial={{ opacity: 0,  x: -10 }}
+                        initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 + (index * 0.1) }}
+                        transition={{ delay: 0.1 + index * 0.1 }}
                         className="flex items-start gap-2"
                       >
                         <Check size={16} className="mt-1 text-primary" />
@@ -111,7 +121,7 @@ export default function InterviewHeader({ title, type }: InterviewHeaderProps) {
           )}
         </div>
       </div>
-      
+
       <p className="text-muted-foreground max-w-2xl text-center mb-6">
         {info.description}
       </p>

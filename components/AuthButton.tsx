@@ -18,7 +18,7 @@ export default function AuthButton() {
   if (session) {
     return (
       <Button
-        variant="outline"
+        variant="secondary"
         onClick={() => signOut()}
         className="flex items-center gap-2"
       >

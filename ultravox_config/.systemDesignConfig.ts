@@ -70,7 +70,7 @@ const selectedTools: SelectedTool[] = [
   {
     toolName: 'queryCorpus',
     parameterOverrides: {
-      corpus_id: 'your-corpus-id-here',
+      corpus_id: '21e42d7d-5fcd-4047-8c6b-0696f8b58e66',
       max_results: 5,
     },
   },

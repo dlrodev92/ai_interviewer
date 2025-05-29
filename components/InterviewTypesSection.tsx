@@ -4,15 +4,32 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { MessageSquare, Code2, Network, Check, Lightbulb, Book, RotateCcw, ArrowRight } from 'lucide-react';
+import {
+  MessageSquare,
+  Code2,
+  Network,
+  Check,
+  Lightbulb,
+  Book,
+  RotateCcw,
+  ArrowRight,
+} from 'lucide-react';
 
 const types = [
   {
     title: 'Behavioral',
-    description: 'Master the art of sharing your experiences and soft skills effectively. Learn to structure your answers using the STAR method and showcase your interpersonal abilities.',
+    description:
+      'Master the art of sharing your experiences and soft skills effectively. Learn to structure your answers using the STAR method and showcase your interpersonal abilities.',
     icon: MessageSquare,
     image: '/confidence_handraw.png',
     shortDesc: 'Perfect your storytelling and demonstrate your soft skills',
@@ -20,24 +37,25 @@ const types = [
       'STAR method mastery',
       'Conflict resolution scenarios',
       'Leadership examples',
-      'Team collaboration stories'
+      'Team collaboration stories',
     ],
     tips: [
       'Use specific examples from your experience',
       'Focus on measurable outcomes',
       'Keep responses concise and structured',
-      'Practice active listening'
+      'Practice active listening',
     ],
     preparation: [
       'Research common behavioral questions',
       'Prepare STAR stories for key competencies',
       'Practice with a friend or mentor',
-      'Record yourself and analyze responses'
-    ]
+      'Record yourself and analyze responses',
+    ],
   },
   {
     title: 'Technical',
-    description: 'Practice coding challenges with real-time feedback and explanations. Get comfortable with live coding, system design discussions, and technical problem-solving.',
+    description:
+      'Practice coding challenges with real-time feedback and explanations. Get comfortable with live coding, system design discussions, and technical problem-solving.',
     icon: Code2,
     image: '/train_handraw.png',
     shortDesc: 'Ace your coding challenges and technical discussions',
@@ -45,24 +63,25 @@ const types = [
       'Data structures & algorithms',
       'Live coding practice',
       'Code optimization',
-      'Problem-solving strategies'
+      'Problem-solving strategies',
     ],
     tips: [
       'Think aloud while solving problems',
       'Start with brute force, then optimize',
       'Consider edge cases early',
-      'Ask clarifying questions'
+      'Ask clarifying questions',
     ],
     preparation: [
       'Practice on coding platforms',
       'Review core CS concepts',
       'Study time/space complexity',
-      'Mock coding interviews'
-    ]
+      'Mock coding interviews',
+    ],
   },
   {
     title: 'System Design',
-    description: 'Learn to design scalable systems and explain your architectural decisions. Practice breaking down complex problems and making informed technical choices.',
+    description:
+      'Learn to design scalable systems and explain your architectural decisions. Practice breaking down complex problems and making informed technical choices.',
     icon: Network,
     image: '/hired_handraw.png',
     shortDesc: 'Design scalable systems with confidence',
@@ -70,20 +89,20 @@ const types = [
       'Architecture patterns',
       'Scalability principles',
       'Trade-off discussions',
-      'Real-world scenarios'
+      'Real-world scenarios',
     ],
     tips: [
       'Start with requirements gathering',
       'Draw clear system diagrams',
       'Discuss trade-offs explicitly',
-      'Consider scalability from start'
+      'Consider scalability from start',
     ],
     preparation: [
       'Study distributed systems',
       'Review real-world architectures',
       'Practice system estimations',
-      'Learn about CAP theorem'
-    ]
+      'Learn about CAP theorem',
+    ],
   },
 ];
 
@@ -91,8 +110,11 @@ export default function InterviewTypes() {
   const [flippedCard, setFlippedCard] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
-      <motion.div 
+    <section
+      id="interview-types"
+      className="py-24 scroll-mt-24  bg-background relative overflow-hidden"
+    >
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -111,16 +133,18 @@ export default function InterviewTypes() {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               whileHover={{ y: -10 }}
               className="relative h-[500px] cursor-pointer"
-              
             >
               <motion.div
                 className="absolute inset-0 preserve-3d duration-500 ease-out"
                 animate={{ rotateY: flippedCard === index ? 180 : 0 }}
               >
                 {/* Front of card */}
-                <Card 
-                onClick={() => setFlippedCard(flippedCard === index ? null : index)}
-                className="absolute inset-0 backface-hidden border-border/50 group hover:shadow-xl transition-shadow duration-300">
+                <Card
+                  onClick={() =>
+                    setFlippedCard(flippedCard === index ? null : index)
+                  }
+                  className="absolute inset-0 backface-hidden border-border/50 group hover:shadow-xl transition-shadow duration-300"
+                >
                   <CardHeader className="relative pb-0">
                     <div className="absolute top-2 right-2  text-4xl font-bold opacity-40 text-background">
                       {(index + 1).toString().padStart(2, '0')}
@@ -138,14 +162,18 @@ export default function InterviewTypes() {
                         <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
                           <type.icon className="w-5 h-5 text-primary" />
                         </div>
-                        <CardTitle className="text-2xl text-primary">{type.title}</CardTitle>
+                        <CardTitle className="text-2xl text-primary">
+                          {type.title}
+                        </CardTitle>
                       </div>
-                      <CardDescription className="text-base">{type.shortDesc}</CardDescription>
+                      <CardDescription className="text-base">
+                        {type.shortDesc}
+                      </CardDescription>
                     </div>
                   </CardHeader>
                   <CardFooter className="absolute bottom-0 left-0 right-0 justify-center pb-6">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       className="group/btn relative overflow-hidden"
                     >
                       <span className="relative z-10 flex items-center gap-2">
@@ -163,7 +191,9 @@ export default function InterviewTypes() {
                     <CardTitle className="flex items-center justify-between">
                       <span>{type.title} Interview</span>
                     </CardTitle>
-                    <CardDescription className="text-sm">{type.description}</CardDescription>
+                    <CardDescription className="text-sm">
+                      {type.description}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Tabs defaultValue="highlights" className="w-full">
@@ -172,7 +202,10 @@ export default function InterviewTypes() {
                         <TabsTrigger value="tips">Tips</TabsTrigger>
                         <TabsTrigger value="prep">Prep</TabsTrigger>
                       </TabsList>
-                      <TabsContent value="highlights" className="space-y-2 mt-4">
+                      <TabsContent
+                        value="highlights"
+                        className="space-y-2 mt-4"
+                      >
                         {type.highlights.map((highlight, i) => (
                           <motion.div
                             key={i}
@@ -217,7 +250,10 @@ export default function InterviewTypes() {
                     </Tabs>
                   </CardContent>
                   <CardFooter className="absolute bottom-0 left-0 right-0 justify-center pb-4">
-                    <Button variant="ghost" onClick={() => setFlippedCard(null)}>
+                    <Button
+                      variant="ghost"
+                      onClick={() => setFlippedCard(null)}
+                    >
                       <RotateCcw className="w-4 h-4 mr-2" />
                       Flip Back
                     </Button>

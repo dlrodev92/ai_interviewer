@@ -4,7 +4,14 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
@@ -16,6 +23,7 @@ interface InterviewTypeCardProps {
   path: string;
   icon: LucideIcon;
   index: number;
+  creditsAvailable: number;
 }
 
 export default function InterviewTypeCard({
@@ -26,7 +34,10 @@ export default function InterviewTypeCard({
   path,
   icon: Icon,
   index,
+  creditsAvailable,
 }: InterviewTypeCardProps) {
+  const hasEnoughCredits = creditsAvailable > 0;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -49,30 +60,35 @@ export default function InterviewTypeCard({
             {shortDesc}
           </CardDescription>
         </CardHeader>
-        
+
         <CardContent className="pt-4 flex-grow flex items-center justify-center">
           <div className="relative w-full h-40 transition-transform duration-300 group-hover:scale-105">
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-contain"
-            />
+            <Image src={image} alt={title} fill className="object-contain" />
           </div>
         </CardContent>
-        
+
         <CardFooter className="mt-auto pb-6">
-          <Link href={path} className="w-full">
-            <Button 
-              className="w-full group/btn relative overflow-hidden"
+          {hasEnoughCredits ? (
+            <Link href={path} className="w-full">
+              <Button className="w-full group/btn relative overflow-hidden cursor-pointer">
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Start Interview
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                </span>
+                <div className="absolute inset-0 bg-primary opacity-0 group-hover/btn:opacity-10 transition-opacity" />
+              </Button>
+            </Link>
+          ) : (
+            <Button
+              className="w-full group/btn relative overflow-hidden cursor-pointer"
+              variant="outline"
+              disabled
             >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                Start Interview
-                <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+              <span className="relative z-10 flex items-center justify-center">
+                No Credits Available
               </span>
-              <div className="absolute inset-0 bg-primary opacity-0 group-hover/btn:opacity-10 transition-opacity" />
             </Button>
-          </Link>
+          )}
         </CardFooter>
       </Card>
     </motion.div>

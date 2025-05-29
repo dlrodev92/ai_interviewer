@@ -295,6 +295,26 @@
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
+  .gradient-section-bridge-top {
+    background: linear-gradient(
+      to bottom,
+      var(--color-background) 100% var(--color-foreground-2) 0%
+    );
+  }
+  .gradient-section-bridge-bottom {
+    background: linear-gradient(
+      to bottom,
+      var(--color-foreground-2) 0%,
+      var(--color-background) 100%
+    );
+  }
+  .gradient-section-bridge-medium {
+    background: linear-gradient(
+      to top,
+      var(--color-foreground-2) 100%,
+      var(--color-background) 0%
+    );
+  }
 }
 
 /* ----------------------------

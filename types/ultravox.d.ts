@@ -1,4 +1,10 @@
+import {
+  Transcript as BaseTranscript,
+  UltravoxSessionStatus,
+} from 'ultravox-client';
+
 export interface JoinUrlResponse {
+  [x: string]: string;
   callId: string;
   created: Date;
   ended: Date | null;
@@ -143,4 +149,8 @@ export interface OrderItem {
 export interface OrderDetailsData {
   items: OrderItem[];
   totalAmount: number;
+}
+
+export interface Transcript extends BaseTranscript {
+  timestamp?: string;
 }

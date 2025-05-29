@@ -12,7 +12,7 @@ export function useMicRipple(
     let animationId: number;
     let start = Date.now();
     const icon = new Image();
-    icon.src = '/mic-icon.svg'; 
+    icon.src = '/mic-icon.svg';
 
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext('2d')!;
@@ -29,7 +29,7 @@ export function useMicRipple(
 
       // Draw ripple waves
       for (let i = 0; i < 3; i++) {
-        const radius = 20 + (elapsed * 20 + i * 15) % 60;
+        const radius = 20 + ((elapsed * 20 + i * 15) % 60);
         const alpha = 1 - radius / 80;
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);

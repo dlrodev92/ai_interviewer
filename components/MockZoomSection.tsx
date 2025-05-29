@@ -10,7 +10,7 @@ const messages = [
   },
   {
     type: 'answer',
-    content: "Cue: `I guess... I've never used var` 😬",
+    content: `I guess... var is for functions 😬`,
   },
   {
     type: 'narrator',
@@ -46,29 +46,32 @@ export default function MockZoomComponent() {
   return (
     <section className="py-24 bg-foreground-2 relative overflow-hidden z-50">
       <div className="max-w-4xl mx-auto px-4">
-        <motion.h2 
-        initial={{ opacity: 40, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeInOut' }}
-        className="text-4xl font-bold mb-6 text-primary">
+        <motion.h2
+          initial={{ opacity: 40, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          className="text-4xl font-bold mb-6 text-primary"
+        >
           This isWhy You Must Practice Before Talk Interviews?
         </motion.h2>
-        <motion.p 
-        initial={{ opacity: 40, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeInOut' }}
-        className="text-xl text-primary mb-16">
+        <motion.p
+          initial={{ opacity: 40, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          className="text-xl text-primary mb-16"
+        >
           Because the difference between hoping you'll do well and knowing
           you'll crush it isn't talent—it's preparation.
         </motion.p>
 
         {/* Zoom Call Container */}
         <motion.div
-        initial={{ y: 200, skewY: 10, opacity: 0 }}
-        whileInView={{ y: 0, skewY: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.2 }}
-        className="relative min-h-[450px] md-aspect-video md:h-[550px] bg-zinc-900 rounded-xl overflow-hidden shadow-2xl border border-zinc-800">
+          initial={{ y: 200, skewY: 10, opacity: 0 }}
+          whileInView={{ y: 0, skewY: 0, opacity: 1 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="relative min-h-[450px] md-aspect-video md:h-[550px] bg-zinc-900 rounded-xl overflow-hidden shadow-2xl border border-zinc-800"
+        >
           {/* Zoom Header */}
           <div className="absolute top-0 w-full bg-zinc-800 px-4 py-2 flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-red-500" />

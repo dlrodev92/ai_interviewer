@@ -8,7 +8,9 @@ interface TranscriptSidebarProps {
   callTranscript: Transcript[];
 }
 
-export default function TranscriptSidebar({ callTranscript }: TranscriptSidebarProps) {
+export default function TranscriptSidebar({
+  callTranscript,
+}: TranscriptSidebarProps) {
   return (
     <Card className="border-border/50 w-full md:w-1/4 h-full max-h-[calc(100vh-100px)] overflow-y-auto">
       <CardContent className="pt-6">

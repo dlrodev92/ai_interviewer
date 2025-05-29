@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import UserStartSigningButton from './UserStartSigningButton';
 
 export default function HeroContent() {
   return (
@@ -27,21 +28,18 @@ export default function HeroContent() {
       </p>
 
       <div className="flex flex-col sm:flex-row items-center justify-start gap-4 animate-fade-in-delay-2">
-        <Button
-          size="lg"
-          variant="default"
-          className="w-full sm:w-auto px-8 py-6 text-lg hover:scale-105 transition-transform"
-        >
-          Try a Free Interview
-        </Button>
-        <Button
-          size="lg"
-          variant="outline"
-          className="w-full sm:w-auto px-8 py-6 text-lg group"
-        >
-          <i className="fa-solid fa-play mr-2 group-hover:animate-bounce"></i>{' '}
-          Watch Demo
-        </Button>
+        <UserStartSigningButton text="Try a Free Interview" />
+
+        <a href="#demo">
+          <Button
+            size="lg"
+            variant="intro"
+            className="w-full sm:w-auto px-8 py-6 text-lg group"
+          >
+            <i className="fa-solid fa-play mr-2 group-hover:animate-bounce "></i>{' '}
+            Watch Demo
+          </Button>
+        </a>
       </div>
     </div>
   );

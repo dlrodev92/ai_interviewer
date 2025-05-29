@@ -45,29 +45,34 @@ export default function Comparison() {
   const [selectedBenefit, setSelectedBenefit] = useState(benefits[0].id);
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden flex flex-col items-center gap-16 z-50">
+    <section
+      id="why_us"
+      className="py-24 scroll-mt-24  bg-background relative overflow-hidden flex flex-col items-center gap-16 z-50"
+    >
       {/* Background Decoration */}
       <div className="absolute inset-0" />
 
       <div className="max-w-7xl mx-auto px-4 relative">
         <div className="text-center mb-16">
-          <motion.h2 
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'linear' }}
-          className="text-3xl md:text-4xl font-bold mb-4 text-primary">
+          <motion.h2
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'linear' }}
+            className="text-3xl md:text-4xl font-bold mb-4 text-primary"
+          >
             This is what you get when you practice with our AI Agent
           </motion.h2>
         </div>
 
         <div className="flex flex-col md:flex-row gap-8 relative">
           {/* Left Column - Content Display */}
-          <motion.div 
+          <motion.div
             initial={{ y: 200, skewY: 10, opacity: 0 }}
             whileInView={{ y: 0, skewY: 0, opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             viewport={{ once: true, amount: 0.2 }}
-          className="flex-[2] flex items-center justify-center relative">
+            className="flex-[2] flex items-center justify-center relative"
+          >
             <div className="absolute" />
             <Card className="w-[50%] aspect-square backdrop-blur-sm relative bg-background ">
               <CardContent className="p-8">
@@ -135,13 +140,13 @@ export default function Comparison() {
                                   'font-mono text-4xl font-bold transition-colors text-primary/30 mr-1'
                                 )}
                               >
-                                {(index + 1).toString().padStart(2, '0')} 
+                                {(index + 1).toString().padStart(2, '0')}
                               </span>
                               {benefit.title}
                             </CardTitle>
                           </div>
                           <p className="text-lg text-foreground leading-relaxed">
-                             - {benefit.description}
+                            - {benefit.description}
                           </p>
                         </motion.div>
                       )
