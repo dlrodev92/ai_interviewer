@@ -20,7 +20,6 @@ export default function BehavioralInterviewPage() {
   const [showInterviewUI, setShowInterviewUI] = useState(false);
   const [isPreparingInterview, setIsPreparingInterview] = useState(false);
 
-  
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
   const [completedInterviewId, setCompletedInterviewId] = useState<
     string | null
@@ -50,7 +49,6 @@ export default function BehavioralInterviewPage() {
     fetchTokens();
   }, []);
 
-
   const handleInterviewEnd = (
     transcript: Transcript[],
     interviewId: string | null
@@ -63,12 +61,11 @@ export default function BehavioralInterviewPage() {
     setAutoGenerateFeedback(true);
   };
 
- 
   const handleFeedbackDialogClose = () => {
     setShowFeedbackDialog(false);
     setShowInterviewUI(false);
     setCallTranscript([]);
-    setFinalTranscript([]); 
+    setFinalTranscript([]);
     setCompletedInterviewId(null);
     setInterviewCompleted(false);
     setAutoGenerateFeedback(false);
@@ -80,7 +77,6 @@ export default function BehavioralInterviewPage() {
       setShowInterviewUI(true);
       setIsPreparingInterview(true);
       await startInterview(data.jobDescription);
-
     } catch (err) {
       setIsPreparingInterview(false);
       const message = err instanceof Error ? err.message : String(err);
@@ -105,7 +101,6 @@ export default function BehavioralInterviewPage() {
         onTranscriptChange: (transcripts) => {
           setCallTranscript([...transcripts]);
 
-          
           if (transcripts.length % 5 === 0) {
             console.log(
               `Transcript updated with ${transcripts.length} entries`
@@ -119,7 +114,6 @@ export default function BehavioralInterviewPage() {
         },
       });
 
-     
       await interviewRef.current.startWithJobDescription(jobDesc);
       setIsCallActive(true);
       setIsPreparingInterview(false);
@@ -144,22 +138,18 @@ export default function BehavioralInterviewPage() {
 
       const currentTranscript = [...callTranscript];
       await interviewRef.current.end();
-
-      
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       console.error('End error:', err);
       setError(message);
       setAgentStatus('Error ending interview');
 
-      
       if (callTranscript.length > 0) {
         const interviewId = interviewRef.current?.getInterviewId() || null;
         handleInterviewEnd(callTranscript, interviewId);
       }
     }
   };
-
 
   if (isLoading) {
     return (

@@ -100,7 +100,10 @@ The systemPrompt should be a direct replacement for the original template, with 
       model: 'gpt-4.1-mini',
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: `Programming Language: ${programmingLanguage}` },
+        {
+          role: 'user',
+          content: `Programming Language: ${programmingLanguage}`,
+        },
       ],
       response_format: { type: 'json_object' },
       temperature: 0.7,
@@ -138,7 +141,10 @@ The systemPrompt should be a direct replacement for the original template, with 
       ];
 
       const missingElements = requiredElements.filter(
-        (element) => !parsedResult.systemPrompt.toLowerCase().includes(element.toLowerCase())
+        (element) =>
+          !parsedResult.systemPrompt
+            .toLowerCase()
+            .includes(element.toLowerCase())
       );
 
       if (missingElements.length > 0) {
@@ -156,7 +162,11 @@ The systemPrompt should be a direct replacement for the original template, with 
 
       return NextResponse.json(result);
     } catch (parseError) {
-      console.error('Error parsing technical LLM response:', parseError, content);
+      console.error(
+        'Error parsing technical LLM response:',
+        parseError,
+        content
+      );
       return NextResponse.json(
         { error: 'Failed to parse the generated technical prompt' },
         { status: 500 }

@@ -47,7 +47,7 @@ export default function DashboardSidebar() {
   return (
     <div
       className={cn(
-        'bg-foreground text-white h-screen transition-all duration-300 ease-in-out relative h-auto',
+        'bg-foreground text-white  transition-all duration-300 ease-in-out relative h-auto',
         isCollapsed ? 'w-20' : 'w-64'
       )}
     >

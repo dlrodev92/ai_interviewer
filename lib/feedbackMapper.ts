@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 
 type RawFeedback = Prisma.InterviewFeedbackGetPayload<{
-  include: { categories: true }
+  include: { categories: true };
 }>;
 
 type MappedFeedback = {

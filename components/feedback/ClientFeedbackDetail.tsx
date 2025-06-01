@@ -126,7 +126,6 @@ export default function ClientFeedbackDetail({
         transition={{ duration: 0.3 }}
         className="max-h-full"
       >
-        
         <Card className="bg-zinc-900 border-zinc-800 mb-4">
           <CardHeader className="sm:pb-4 pb-3">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
@@ -195,7 +194,6 @@ export default function ClientFeedbackDetail({
           </TabsList>
 
           <div className="overflow-auto pb-6">
-       
             <TabsContent value="overview" className="mt-0">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <Card className="bg-zinc-900 border-zinc-800 lg:col-span-2 h-auto">
@@ -307,7 +305,6 @@ export default function ClientFeedbackDetail({
                 </CardContent>
               </Card>
             </TabsContent>
-
           </div>
         </Tabs>
       </motion.div>

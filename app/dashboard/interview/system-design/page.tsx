@@ -18,7 +18,9 @@ type TranscriptWithTimestamp = Transcript & {
 export default function SystemDesignInterviewPage() {
   const [isCallActive, setIsCallActive] = useState(false);
   const [agentStatus, setAgentStatus] = useState('Ready to start');
-  const [callTranscript, setCallTranscript] = useState<TranscriptWithTimestamp[]>([]);
+  const [callTranscript, setCallTranscript] = useState<
+    TranscriptWithTimestamp[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
   const [jobDescription, setJobDescription] = useState('');
   const [showInterviewUI, setShowInterviewUI] = useState(false);
@@ -28,7 +30,9 @@ export default function SystemDesignInterviewPage() {
   const [completedInterviewId, setCompletedInterviewId] = useState<
     string | null
   >(null);
-  const [finalTranscript, setFinalTranscript] = useState<TranscriptWithTimestamp[]>([]);
+  const [finalTranscript, setFinalTranscript] = useState<
+    TranscriptWithTimestamp[]
+  >([]);
   const [autoGenerateFeedback, setAutoGenerateFeedback] = useState(false);
 
   const interviewRef = useRef<InterviewManager | null>(null);

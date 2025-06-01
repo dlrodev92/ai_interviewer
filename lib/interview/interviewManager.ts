@@ -30,7 +30,8 @@ export class InterviewManager {
   private endCallTimeout: NodeJS.Timeout | null = null;
   private interviewId: string | null = null;
   private startTime: number = 0;
-  private interviewType: 'behavioral' | 'technical' | 'systemdesign' = 'behavioral';
+  private interviewType: 'behavioral' | 'technical' | 'systemdesign' =
+    'behavioral';
 
   private readonly INTERVIEW_DURATION_MS = 5.5 * 60 * 1000;
 
@@ -62,7 +63,9 @@ export class InterviewManager {
     }
   }
 
-  private processTranscript(transcripts: Transcript[]): TranscriptWithTimestamp[] {
+  private processTranscript(
+    transcripts: Transcript[]
+  ): TranscriptWithTimestamp[] {
     return transcripts.map((entry, index) => {
       const entryWithTimestamp = entry as TranscriptWithTimestamp;
       if (entryWithTimestamp.timestamp) return entryWithTimestamp;
@@ -234,9 +237,7 @@ export class InterviewManager {
 
       this.interviewId = `systemdesign_interview_${Date.now()}`;
 
-      this.handlers.onStatusChange(
-        `Starting system design interview...`
-      );
+      this.handlers.onStatusChange(`Starting system design interview...`);
 
       const technologyStack = promptResult.technologyStack || 'General';
       const configCopy = { ...systemDesignConfig(technologyStack).callConfig };

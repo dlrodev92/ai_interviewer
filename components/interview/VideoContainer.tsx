@@ -169,7 +169,6 @@ export default function VideoContainer({
         </div>
       </motion.div>
 
-  
       <AlertDialog
         open={showEndConfirmation}
         onOpenChange={setShowEndConfirmation}

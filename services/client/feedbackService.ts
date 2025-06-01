@@ -50,7 +50,6 @@ export async function getUserFeedbacks() {
   }
 }
 
-
 export async function getFeedbackById(id: string, userId: string) {
   const dbFeedback = await prisma.interviewFeedback.findUnique({
     where: {

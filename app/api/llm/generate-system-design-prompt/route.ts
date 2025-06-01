@@ -138,7 +138,10 @@ The systemPrompt should be a direct replacement for the original template, with 
       ];
 
       const missingElements = requiredElements.filter(
-        (element) => !parsedResult.systemPrompt.toLowerCase().includes(element.toLowerCase())
+        (element) =>
+          !parsedResult.systemPrompt
+            .toLowerCase()
+            .includes(element.toLowerCase())
       );
 
       if (missingElements.length > 0) {
@@ -156,7 +159,11 @@ The systemPrompt should be a direct replacement for the original template, with 
 
       return NextResponse.json(result);
     } catch (parseError) {
-      console.error('Error parsing system design LLM response:', parseError, content);
+      console.error(
+        'Error parsing system design LLM response:',
+        parseError,
+        content
+      );
       return NextResponse.json(
         { error: 'Failed to parse the generated system design prompt' },
         { status: 500 }

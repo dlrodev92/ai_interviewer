@@ -8,7 +8,7 @@ export async function getUserByEmail(email: string) {
   });
 
   if (!user) {
-    notFound(); 
+    notFound();
   }
 
   return user;

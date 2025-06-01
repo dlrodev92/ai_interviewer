@@ -15,7 +15,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Get interview data from the request
     const { interviewId, transcript } = await request.json();
 
     if (!interviewId) {
@@ -25,7 +24,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Get the user ID
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
       select: { id: true },
@@ -35,23 +33,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    console.log(
-      `Generating feedback for behavioral interview ID: ${interviewId}`
-    );
+    console.log(`Generating feedback for behavioral interview ID: ${interviewId}`);
 
-    // Check if we received a transcript in the request
     let transcriptData = transcript;
 
-    // If no transcript data was provided in the request, try to retrieve it from storage
     if (!transcriptData || transcriptData.length === 0) {
-      console.log(
-        'No transcript provided in request, attempting to retrieve from storage'
-      );
+      console.log('No transcript provided in request, attempting to retrieve from storage');
       transcriptData = await retrieveTranscriptFromStorage(interviewId);
     } else {
-      console.log(
-        `Using transcript from request with ${transcriptData.length} entries`
-      );
+      console.log(`Using transcript from request with ${transcriptData.length} entries`);
     }
 
     if (!transcriptData || transcriptData.length === 0) {
@@ -61,10 +51,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Generate behavioral feedback
     const feedback = await generateBehavioralFeedback(transcriptData);
 
-    // Store the generated feedback in the database
     const result = await storeFeedbackInDatabase(
       feedback,
       user.id,
@@ -90,14 +78,11 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+}
 
 async function retrieveTranscriptFromStorage(interviewId: string) {
-  console.log(
-    'WARNING: Using mock transcript data - this should be replaced with actual storage retrieval'
-  );
+  console.log('WARNING: Using mock transcript data - this should be replaced with actual storage retrieval');
 
-  // In a production system, you would query your database here based on interviewId
-  // For now, return mock data with a generic interview
   return [
     {
       speaker: 'agent',
