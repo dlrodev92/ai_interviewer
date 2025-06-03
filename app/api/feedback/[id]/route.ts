@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 export async function DELETE(
   request: NextRequest,
@@ -17,7 +18,9 @@ export async function DELETE(
   }
 
   const session = await getServerSession(authOptions);
-  if (!session?.user?.email) {
+  const email = session?.user?.email;
+
+  if (!email) {
     return NextResponse.json(
       { success: false, error: 'Unauthorized' },
       { status: 401 }
@@ -25,7 +28,7 @@ export async function DELETE(
   }
 
   const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
+    where: { email },
     select: { id: true },
   });
 
@@ -37,10 +40,7 @@ export async function DELETE(
   }
 
   const feedback = await prisma.interviewFeedback.findUnique({
-    where: {
-      id,
-      userId: user.id,
-    },
+    where: { id, userId: user.id },
   });
 
   if (!feedback) {
@@ -53,12 +53,15 @@ export async function DELETE(
     );
   }
 
-  await prisma.$transaction(async (tx) => {
-    await tx.feedbackCategory.deleteMany({ where: { feedbackId: id } });
-    await tx.feedbackStrength.deleteMany({ where: { feedbackId: id } });
-    await tx.feedbackImprovement.deleteMany({ where: { feedbackId: id } });
-    await tx.transcriptEntry.deleteMany({ where: { feedbackId: id } });
-    await tx.interviewFeedback.delete({ where: { id } });
+  await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
+    const deletions = [
+      tx.feedbackCategory.deleteMany({ where: { feedbackId: id } }),
+      tx.feedbackStrength.deleteMany({ where: { feedbackId: id } }),
+      tx.feedbackImprovement.deleteMany({ where: { feedbackId: id } }),
+      tx.transcriptEntry.deleteMany({ where: { feedbackId: id } }),
+      tx.interviewFeedback.delete({ where: { id } }),
+    ];
+    await Promise.all(deletions);
   });
 
   return NextResponse.json({
