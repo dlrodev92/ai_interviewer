@@ -1,7 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Transcript } from 'ultravox-client';
+import { Transcript as BaseTranscript } from 'ultravox-client';
+
+interface Transcript extends BaseTranscript {
+  timestamp?: string;
+}
 import { useRouter } from 'next/navigation';
 import {
   Dialog,
@@ -138,7 +142,13 @@ export default function InterviewEndDialog({
       const endpoint = `/api/feedback/generate/${detectedType}`;
 
       // Create payload with type-specific parameters
-      const payload: any = {
+      interface FeedbackPayload {
+        interviewId: string;
+        transcript: { speaker: string; text: string; timestamp: string }[];
+        programmingLanguage?: string;
+      }
+
+      const payload: FeedbackPayload = {
         interviewId,
         transcript: formattedTranscript,
       };
@@ -177,7 +187,11 @@ export default function InterviewEndDialog({
 
         // Short delay to show success message before redirecting
         setTimeout(() => {
-          router.push(`/dashboard/feedback/${result.feedback.id}`);
+          if (result.feedback?.id) {
+            router.push(`/dashboard/feedback/${result.feedback.id}`);
+          } else {
+            throw new Error('Generated feedback does not have an ID');
+          }
         }, 1000);
       } else {
         throw new Error('Generated feedback does not have an ID');

@@ -26,13 +26,19 @@ export function toggleMute(role: Role): void {
   if (uvSession) {
     // Toggle (user) Mic
     if (role == Role.USER) {
-      uvSession.isMicMuted ? uvSession.unmuteMic() : uvSession.muteMic();
+      if (uvSession.isMicMuted) {
+        uvSession.unmuteMic();
+      } else {
+        uvSession.muteMic();
+      }
     }
     // Mute (agent) Speaker
     else {
-      uvSession.isSpeakerMuted
-        ? uvSession.unmuteSpeaker()
-        : uvSession.muteSpeaker();
+      if (uvSession.isSpeakerMuted) {
+        uvSession.unmuteSpeaker();
+      } else {
+        uvSession.muteSpeaker();
+      }
     }
   } else {
     console.error('uvSession is not initialized.');
@@ -73,7 +79,10 @@ export async function createBehavioralCall(
 export async function createSystemDesignCall(
   showDebugMessages?: boolean
 ): Promise<JoinUrlResponse> {
-  return createCall(systemDesignConfig.callConfig, showDebugMessages);
+  return createCall(
+    systemDesignConfig('defaultTechnologyStack').callConfig,
+    showDebugMessages
+  );
 }
 
 export async function createCodeInterviewCall(
@@ -112,15 +121,16 @@ export async function startCall(
     }
 
     if (uvSession) {
-      uvSession.addEventListener('status', (event: any) => {
+      uvSession.addEventListener('status', () => {
         callbacks.onStatusChange(uvSession?.status);
       });
 
-      uvSession.addEventListener('transcripts', (event: any) => {
+      uvSession.addEventListener('transcripts', () => {
         callbacks.onTranscriptChange(uvSession?.transcripts);
       });
 
-      uvSession.addEventListener('experimental_message', (msg: any) => {
+      uvSession.addEventListener('experimental_message', (event: Event) => {
+        const msg = event as UltravoxExperimentalMessageEvent;
         callbacks?.onDebugMessage?.(msg);
       });
 

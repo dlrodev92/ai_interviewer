@@ -1,7 +1,11 @@
-// modules/auth/auth.ts
-import { signIn, signOut, useSession } from 'next-auth/react';
+import {
+  signIn,
+  signOut,
+  useSession,
+  type SignInOptions,
+} from 'next-auth/react';
 
-export const login = async (provider: string, options?: object) => {
+export const login = async (provider: string, options?: SignInOptions) => {
   return signIn(provider, options);
 };
 

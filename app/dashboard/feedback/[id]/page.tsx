@@ -17,7 +17,7 @@ function formatDate(date: Date) {
 export default async function FeedbackDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
   const session = await getServerSession(authOptions);

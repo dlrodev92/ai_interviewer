@@ -1,10 +1,7 @@
-'use client';
-
-import { SessionProvider } from 'next-auth/react';
 import { Aldrich } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import { LocomotiveProvider } from '@/hooks/useLocomotiveScrollHook';
+import { Providers } from '../hooks/Providers';
 
 const aldrichSans = Aldrich({
   weight: '400',
@@ -13,13 +10,10 @@ const aldrichSans = Aldrich({
   subsets: ['latin'],
 });
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <SessionProvider>
-      <LocomotiveProvider>{children}</LocomotiveProvider>
-    </SessionProvider>
-  );
-}
+export const metadata = {
+  title: 'My App',
+  description: 'An amazing app',
+};
 
 export default function RootLayout({
   children,

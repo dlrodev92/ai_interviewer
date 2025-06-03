@@ -1,10 +1,10 @@
 // modules/user/userApi.ts
-import { api } from '@/core/api/apiHandler';
+import { apiHandler } from '@/core/apiHandler';
 
 export const getUsers = async () => {
-  return api.get('/users');
+  return apiHandler.get('/users');
 };
 
 export const getUserById = async (id: string) => {
-  return api.get(`/users/${id}`);
+  return apiHandler.get(`/users/${id}`);
 };

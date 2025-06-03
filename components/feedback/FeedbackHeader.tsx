@@ -1,5 +1,3 @@
-// /components/feedback/detail/FeedbackHeader.tsx
-
 import {
   Card,
   CardHeader,
@@ -25,7 +23,7 @@ export default function FeedbackHeader({
   formatDate,
 }: FeedbackHeaderProps) {
   // Function to render stars based on score
-  const renderStars = (score) => {
+  const renderStars = (score: number) => {
     return (
       <div className="flex items-center">
         {[1, 2, 3, 4, 5].map((star) => (

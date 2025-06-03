@@ -4,7 +4,13 @@ import prisma from '@/lib/prisma';
 /**
  * Format the transcript for the OpenAI prompt
  */
-export function formatTranscript(transcript: any[]) {
+interface TranscriptEntry {
+  speaker: string;
+  text: string;
+  timestamp: string;
+}
+
+export function formatTranscript(transcript: TranscriptEntry[]) {
   return transcript
     .map((entry) => {
       // Convert 'agent' and 'user' to 'Interviewer' and 'You'
@@ -17,7 +23,9 @@ export function formatTranscript(transcript: any[]) {
 /**
  * Generate feedback for a behavioral interview
  */
-export async function generateBehavioralFeedback(transcript: any[]) {
+export async function generateBehavioralFeedback(
+  transcript: TranscriptEntry[]
+) {
   const formattedTranscript = formatTranscript(transcript);
   console.log(
     `Formatted behavioral transcript (first 200 chars): ${formattedTranscript.substring(0, 200)}...`
@@ -70,7 +78,7 @@ Include specific behavioral insights where appropriate and be honest but constru
  * Generate feedback for a technical interview
  */
 export async function generateTechnicalFeedback(
-  transcript: any[],
+  transcript: TranscriptEntry[],
   programmingLanguage?: string
 ) {
   const formattedTranscript = formatTranscript(transcript);
@@ -131,7 +139,7 @@ Include specific technical insights${programmingLanguage ? ` related to ${progra
  * Generate feedback for a system design interview
  */
 export async function generateSystemDesignFeedback(
-  transcript: any[],
+  transcript: TranscriptEntry[],
   technologyStack?: string
 ) {
   const formattedTranscript = formatTranscript(transcript);
@@ -227,11 +235,11 @@ async function callOpenAI(prompt: string, feedbackType: string) {
         JSON.stringify(feedbackContent, null, 2).substring(0, 200) + '...'
       );
       return feedbackContent;
-    } catch (err) {
+    } catch {
       console.error('Error parsing OpenAI response:', content);
       throw new Error('Failed to parse feedback generation response');
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(
       `Error generating ${feedbackType} feedback with OpenAI:`,
       error
@@ -246,11 +254,26 @@ async function callOpenAI(prompt: string, feedbackType: string) {
 /**
  * Store the generated feedback in the database
  */
+interface FeedbackData {
+  title: string;
+  duration?: number;
+  type?: string;
+  overallScore: number;
+  summary: string;
+  categories?: {
+    name: string;
+    score: number;
+    description: string;
+  }[];
+  strengths?: string[];
+  improvements?: string[];
+}
+
 export async function storeFeedbackInDatabase(
-  feedbackData,
+  feedbackData: FeedbackData,
   userId: string,
   interviewId: string,
-  transcript
+  transcript: TranscriptEntry[]
 ) {
   // Store the feedback in the database using a transaction
   const feedback = await prisma.$transaction(async (tx) => {

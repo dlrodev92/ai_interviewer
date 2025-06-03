@@ -5,17 +5,23 @@ import prisma from '@/lib/prisma';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = await params;
 
   if (!id) {
-    return NextResponse.json({ success: false, error: 'Feedback ID is required' }, { status: 400 });
+    return NextResponse.json(
+      { success: false, error: 'Feedback ID is required' },
+      { status: 400 }
+    );
   }
 
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
-    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json(
+      { success: false, error: 'Unauthorized' },
+      { status: 401 }
+    );
   }
 
   const user = await prisma.user.findUnique({
@@ -24,15 +30,27 @@ export async function DELETE(
   });
 
   if (!user) {
-    return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 });
+    return NextResponse.json(
+      { success: false, error: 'User not found' },
+      { status: 404 }
+    );
   }
 
   const feedback = await prisma.interviewFeedback.findUnique({
-    where: { id, userId: user.id },
+    where: {
+      id,
+      userId: user.id,
+    },
   });
 
   if (!feedback) {
-    return NextResponse.json({ success: false, error: 'Feedback not found or not owned by user' }, { status: 404 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Feedback not found or does not belong to this user',
+      },
+      { status: 404 }
+    );
   }
 
   await prisma.$transaction(async (tx) => {
@@ -43,5 +61,8 @@ export async function DELETE(
     await tx.interviewFeedback.delete({ where: { id } });
   });
 
-  return NextResponse.json({ success: true, message: 'Feedback deleted successfully' });
+  return NextResponse.json({
+    success: true,
+    message: 'Feedback deleted successfully',
+  });
 }
