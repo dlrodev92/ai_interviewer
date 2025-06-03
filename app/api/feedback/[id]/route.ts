@@ -1,16 +1,14 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/authOptions';
 import prisma from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-// DELETE handler for feedback
 export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
   try {
-    // Get the feedback ID from the route parameters
-    const { id } = params;
+    const { id } = context.params;
 
     if (!id) {
       return NextResponse.json(
@@ -22,7 +20,6 @@ export async function DELETE(
       );
     }
 
-    // Get the current user session
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) {
@@ -35,7 +32,6 @@ export async function DELETE(
       );
     }
 
-    // Get the user ID
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
       select: { id: true },
@@ -51,11 +47,10 @@ export async function DELETE(
       );
     }
 
-    // Check if the feedback exists and belongs to the user
     const feedback = await prisma.interviewFeedback.findUnique({
       where: {
         id,
-        userId: user.id, // Ensure the feedback belongs to the current user
+        userId: user.id,
       },
     });
 
@@ -69,37 +64,31 @@ export async function DELETE(
       );
     }
 
-    // Delete all related records in a transaction to ensure consistency
     await prisma.$transaction(async (tx) => {
-      // Delete categories
       await tx.feedbackCategory.deleteMany({
         where: {
           feedbackId: id,
         },
       });
 
-      // Delete strengths
       await tx.feedbackStrength.deleteMany({
         where: {
           feedbackId: id,
         },
       });
 
-      // Delete improvements
       await tx.feedbackImprovement.deleteMany({
         where: {
           feedbackId: id,
         },
       });
 
-      // Delete transcript entries
       await tx.transcriptEntry.deleteMany({
         where: {
           feedbackId: id,
         },
       });
 
-      // Delete the feedback itself
       await tx.interviewFeedback.delete({
         where: {
           id,
