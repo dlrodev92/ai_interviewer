@@ -33,15 +33,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    console.log(`Generating feedback for behavioral interview ID: ${interviewId}`);
+    console.log(
+      `Generating feedback for behavioral interview ID: ${interviewId}`
+    );
 
     let transcriptData = transcript;
 
     if (!transcriptData || transcriptData.length === 0) {
-      console.log('No transcript provided in request, attempting to retrieve from storage');
+      console.log(
+        'No transcript provided in request, attempting to retrieve from storage'
+      );
       transcriptData = await retrieveTranscriptFromStorage(interviewId);
     } else {
-      console.log(`Using transcript from request with ${transcriptData.length} entries`);
+      console.log(
+        `Using transcript from request with ${transcriptData.length} entries`
+      );
     }
 
     if (!transcriptData || transcriptData.length === 0) {
@@ -81,7 +87,9 @@ export async function POST(request: Request) {
 }
 
 async function retrieveTranscriptFromStorage(interviewId: string) {
-  console.log('WARNING: Using mock transcript data - this should be replaced with actual storage retrieval');
+  console.log(
+    'WARNING: Using mock transcript data - this should be replaced with actual storage retrieval'
+  );
 
   return [
     {
