@@ -12,10 +12,7 @@ export async function DELETE(
 
     if (!id) {
       return NextResponse.json(
-        {
-          success: false,
-          error: 'Feedback ID is required',
-        },
+        { success: false, error: 'Feedback ID is required' },
         { status: 400 }
       );
     }
@@ -24,10 +21,7 @@ export async function DELETE(
 
     if (!session?.user?.email) {
       return NextResponse.json(
-        {
-          success: false,
-          error: 'Unauthorized',
-        },
+        { success: false, error: 'Unauthorized' },
         { status: 401 }
       );
     }
@@ -39,10 +33,7 @@ export async function DELETE(
 
     if (!user) {
       return NextResponse.json(
-        {
-          success: false,
-          error: 'User not found',
-        },
+        { success: false, error: 'User not found' },
         { status: 404 }
       );
     }
@@ -65,35 +56,11 @@ export async function DELETE(
     }
 
     await prisma.$transaction(async (tx) => {
-      await tx.feedbackCategory.deleteMany({
-        where: {
-          feedbackId: id,
-        },
-      });
-
-      await tx.feedbackStrength.deleteMany({
-        where: {
-          feedbackId: id,
-        },
-      });
-
-      await tx.feedbackImprovement.deleteMany({
-        where: {
-          feedbackId: id,
-        },
-      });
-
-      await tx.transcriptEntry.deleteMany({
-        where: {
-          feedbackId: id,
-        },
-      });
-
-      await tx.interviewFeedback.delete({
-        where: {
-          id,
-        },
-      });
+      await tx.feedbackCategory.deleteMany({ where: { feedbackId: id } });
+      await tx.feedbackStrength.deleteMany({ where: { feedbackId: id } });
+      await tx.feedbackImprovement.deleteMany({ where: { feedbackId: id } });
+      await tx.transcriptEntry.deleteMany({ where: { feedbackId: id } });
+      await tx.interviewFeedback.delete({ where: { id } });
     });
 
     return NextResponse.json({
