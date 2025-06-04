@@ -9,7 +9,9 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+RUN npx prisma generate
+RUN npm run Build
+
 
 # Production
 FROM node:18-alpine AS runner

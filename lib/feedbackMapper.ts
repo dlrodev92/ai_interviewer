@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 
 type RawFeedback = Prisma.InterviewFeedbackGetPayload<{
   include: { categories: true };
